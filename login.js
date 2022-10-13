@@ -16,7 +16,7 @@ export default function LoginPage() {
  
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={require("./assets/lion.jpg")} />
+      <Image style={styles.image} source={require("../assets/lion.jpg")} />
  
       <StatusBar style="auto" />
       <View style={styles.inputView}>
