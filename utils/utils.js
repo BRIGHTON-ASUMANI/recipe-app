@@ -6,3 +6,5 @@ export const logiHeaders = () => {
     
     return { headers };
 };
+
+export const API = "https://tidy-bugs-look-41-90-68-191.loca.lt";

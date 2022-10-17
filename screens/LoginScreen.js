@@ -11,22 +11,54 @@ import {
 import { Button, withTheme } from "react-native-paper";
 import { StackActions } from "@react-navigation/native";
 import { AuthContext } from "../context/Authcontext";
+import { API } from "../utils/utils";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import LoadingScreen from "./LoadingScreen";
 
 
-const LoginScreen = ({ navigation, theme }) => {
+const LoginScreen = ({ navigation }) => {
 //   const { colors } = theme;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { loggedIn, login } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+  const { state, setState } = useContext(AuthContext);
 
-  useEffect(() => {
-    if (loggedIn) {
-      navigation.dispatch(StackActions.replace("Account"));
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     navigation.dispatch(StackActions.replace("Account"));
+  //   }
+  // }, [loggedIn]);
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    if (!email || !password){
+      alert("All fields are required");
+      setLoading(false);
+      return;
     }
-  }, [loggedIn]);
+
+    try {
+      const endpoint = `/api/user/token/`
+      const { data } = await axios.post(endpoint, {email,password} )
+      if (data.error){
+          alert(data.error)
+      } else {
+          setState(data)
+          await AsyncStorage.setItem('@auth', JSON.stringify(data))
+          setLoading(false)
+          navigation.navigate("Home");
+          // alert('Sign in successful');
+      }
+      } catch (err) {
+      setLoading(false)
+      alert('Error logging in');
+      }
+
+  }
 
   return (
-    <View style={styles.container}>
+    loading ? <LoadingScreen/> : <View style={styles.container}>
       <Image style={styles.image} source={require("../assets/lion.jpg")} />
  
       <StatusBar style="auto" />
@@ -52,8 +84,8 @@ const LoginScreen = ({ navigation, theme }) => {
       <TouchableOpacity>
         <Text style={styles.forgot_button}>Forgot Password?</Text>
       </TouchableOpacity>
- 
-      <TouchableOpacity onPress={() => login(email, password)} style={styles.loginBtn}>
+      
+      <TouchableOpacity onPress={() => handleSubmit()} style={styles.loginBtn}>
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
     </View>

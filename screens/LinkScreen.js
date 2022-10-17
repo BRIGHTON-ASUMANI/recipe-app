@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { withTheme } from "react-native-paper";
 
 
-const AccountScreen = ({ navigation, theme }) => {
+const LinkScreen = ({ navigation, theme }) => {
   const { colors } = theme;
   return (
     <SafeAreaView style={{ flex: 1}}>
@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(AccountScreen);
+export default withTheme(LinkScreen);

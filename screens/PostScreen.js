@@ -3,18 +3,20 @@ import { View, Text, StyleSheet } from "react-native";
 import { withTheme } from "react-native-paper";
 
 
-const AccountScreen = ({ navigation, theme }) => {
+const PostScreen = ({ navigation, theme }) => {
   const { colors } = theme;
   return (
+
     <SafeAreaView style={{ flex: 1}}>
-    {/* <Avatar.Image size={100} source={{ uri: userData.picture }} /> */}
-{state && (
- <Text>{JSON.stringify(state, null, 4)}</Text>
-)}
-<View style={{ flex: 1, justifyContent: "flex-end"}}>
-<FooterTabs />
-</View>
+           {/* <Avatar.Image size={100} source={{ uri: userData.picture }} /> */}
+    {state && (
+        <Text>{JSON.stringify(state, null, 4)}</Text>
+    )}
+    <View style={{ flex: 1, justifyContent: "flex-end"}}>
+      <FooterTabs />
+    </View>
 </SafeAreaView>
+  
   );
 };
 
@@ -36,4 +38,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(AccountScreen);
+export default withTheme(PostScreen);
