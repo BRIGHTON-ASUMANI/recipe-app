@@ -1,6 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import jwtDecode from "jwt-decode";
 import axios from "axios";
 import { API } from "../utils/utils";
 
@@ -11,14 +10,14 @@ const [state, setState] = useState({
     token: "",
 });
 
-axios.defaults.baseURL = API; 
+axios.defaults.baseURL = API;
+axios.defaults.headers.common['Authorization'] = "Token " + state.token
 
 useEffect(() => {
     const loadFromAsyncStorage = async ()=>{
         let data = await AsyncStorage.getItem("@auth");
-        console.log({data})
-        // const as = JSON.parse(data);
-        setState({ ...state, token: data && data.token})
+        const as = JSON.parse(data);
+        setState({ ...state, token: as.token})
       }
     
       loadFromAsyncStorage()

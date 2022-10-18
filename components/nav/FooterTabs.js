@@ -29,7 +29,6 @@ export const Tab = ({name, iconName, handlePress, screenName, routeName})=>{
 export default function FooterTabs () {
     const navigation = useNavigation()
     const route = useRoute()
-    console.log(route)
     
     return (
         <>

@@ -1,23 +1,12 @@
 // /App.js
 
 import React, { useContext } from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
 
 // Navigation
-import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 // Screens
 import HomeScreen from '../../screens/HomeScreen';
-import LoadingScreen from '../../screens/LoadingScreen';
 import LoginScreen from '../../screens/LoginScreen';
 import AccountScreen from '../../screens/AccountScreen';
 import SignUpScreen from '../../screens/SignUpScreen';

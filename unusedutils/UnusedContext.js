@@ -2,7 +2,6 @@ import React, { useState, useEffect, createContext } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import jwtDecode from "jwt-decode";
 import axios from "axios";
-import { logiHeaders } from "../utils/utils";
 
 const AuthContext = createContext();
 
@@ -52,7 +51,6 @@ useEffect(() => {
         }
         }
     } catch (err) {
-        console.log(err)
         // alert('Error logging in');
     }
     })();
