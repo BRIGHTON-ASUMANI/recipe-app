@@ -1,0 +1,14 @@
+{
+    "files.autoSave": "onFocusChange",
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "eslint.autoFixOnSave": true,
+    "eslint.enable": true,
+    "prettier.singleQuote": true,
+    "printWidth": 100,
+    "trailingComma": "all",
+    "tabWidth": 2, 
+    "singleQuote": true,
+    "semi": true,
+    "endOfLine": "lf"
+}
