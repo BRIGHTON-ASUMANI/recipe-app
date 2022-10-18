@@ -1,6 +1,7 @@
+/* eslint-disable no-alert */
 /* eslint-disable global-require */
 /* eslint-disable react/style-prop-object */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,12 +11,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { Button, withTheme } from 'react-native-paper';
-import { StackActions } from '@react-navigation/native';
+import { withTheme } from 'react-native-paper';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AuthContext } from '../context/Authcontext';
-import { API } from '../utils/utils';
 
 const styles = StyleSheet.create({
   container: {
@@ -68,7 +66,6 @@ const SignUpScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [name, setUserName] = useState('');
   const [loading, setLoading] = useState(false);
-  const { state, setState } = useContext(AuthContext);
 
   const handleSubmit = async () => {
     setLoading(true);

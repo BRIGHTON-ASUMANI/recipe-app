@@ -1,35 +1,11 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
-import {
-  View, ScrollView, Text, StyleSheet,
-} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ScrollView } from 'react-native';
 import { withTheme } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FooterTabs from '../components/nav/FooterTabs';
-import { AuthContext } from '../context/Authcontext';
-import { logiHeaders } from '../utils/utils';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingRight: 30,
-    paddingLeft: 30,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  userContainer: {
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  textContainer: {
-    marginTop: 10,
-  },
-});
-
-const AccountScreen = ({ navigation, theme }) => {
-  const { colors } = theme;
+const AccountScreen = () => {
   const [userData, setUserData] = useState({});
   const endpoint = '/api/user/me/';
 

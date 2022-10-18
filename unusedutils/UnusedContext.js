@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable camelcase */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import React, { useState, useEffect, createContext } from 'react';
@@ -12,7 +13,7 @@ const AuthContextProvider = (props) => {
   const [loggedIn, setLoggedIn] = useState(null);
   const [userData, setUserData] = useState(null);
 
-  const getUserData = async (id) => {
+  const getUserData = async () => {
     const { name, picture, exp } = jwtDecode(userData);
 
     if (exp < Date.now() / 1000) {
@@ -77,12 +78,6 @@ const AuthContextProvider = (props) => {
       alert('Error logging in');
     }
   };
-
-  const loadFromAsyncStorage = async () => {
-    const data = await AsyncStorage.getItem('@auth');
-  };
-
-  loadFromAsyncStorage();
 
   const logout = async () => {
     setLoading(true);

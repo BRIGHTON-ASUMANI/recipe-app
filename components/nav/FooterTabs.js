@@ -1,9 +1,7 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
 import {
-  Text,
-  View,
-  TouchableOpacity,
+  Text, View, TouchableOpacity,
 } from 'react-native';
 import { Divider } from 'react-native-elements';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';

@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-const LoadingScreen = ({ navigation, theme }) => (
+const LoadingScreen = () => (
   <View style={styles.container}>
     <>
       <ActivityIndicator size="large" />

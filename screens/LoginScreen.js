@@ -1,21 +1,17 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-useless-escape */
+/* eslint-disable no-alert */
 /* eslint-disable react/style-prop-object */
 /* eslint-disable global-require */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TextInput,
-  TouchableOpacity,
+  StyleSheet, Text, View, Image, TextInput, TouchableOpacity,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { Button, withTheme } from 'react-native-paper';
-import { StackActions } from '@react-navigation/native';
+import { withTheme } from 'react-native-paper';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext } from '../context/Authcontext';
-import { API } from '../utils/utils';
 import LoadingScreen from './LoadingScreen';
 
 const styles = StyleSheet.create({
@@ -33,7 +29,7 @@ const styles = StyleSheet.create({
   inputView: {
     backgroundColor: '#FFC0CB',
     borderRadius: 30,
-    width: '70%',
+    width: '90%',
     height: 45,
     marginBottom: 20,
 
@@ -43,7 +39,7 @@ const styles = StyleSheet.create({
   TextInput: {
     height: 50,
     flex: 1,
-    padding: 10,
+    // padding: 10,
     marginLeft: 20,
   },
 
@@ -53,7 +49,7 @@ const styles = StyleSheet.create({
   },
 
   loginBtn: {
-    width: '80%',
+    width: '60%',
     borderRadius: 25,
     height: 50,
     alignItems: 'center',
@@ -68,7 +64,18 @@ const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { state, setState } = useContext(AuthContext);
+  const { setState } = useContext(AuthContext);
+
+  const validate = (text) => {
+    console.log(text);
+    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    if (reg.test(text) === false) {
+      alert('Email is Not Correct');
+      setEmail(text);
+      return false;
+    }
+    setEmail(text);
+  };
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -107,7 +114,7 @@ const LoginScreen = ({ navigation }) => {
             style={styles.TextInput}
             placeholder="Email."
             placeholderTextColor="#003f5c"
-            onChangeText={(e) => setEmail(e)}
+            onChangeText={(e) => validate(e)}
           />
         </View>
 

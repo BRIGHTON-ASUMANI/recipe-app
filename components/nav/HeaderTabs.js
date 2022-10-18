@@ -1,16 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useContext } from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { AuthContext } from '../../context/Authcontext';
 
 export default function HeaderTabs() {
-  const { state, setState } = useContext(AuthContext);
+  const { setState } = useContext(AuthContext);
   const signOut = async () => {
     setState({ token: '' });
     await AsyncStorage.removeItem('@auth');
