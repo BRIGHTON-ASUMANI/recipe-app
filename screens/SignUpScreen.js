@@ -1,71 +1,22 @@
-/* eslint-disable no-alert */
-/* eslint-disable global-require */
-/* eslint-disable react/style-prop-object */
 import React, { useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { withTheme } from 'react-native-paper';
+import { View } from 'react-native';
+import Text from '@kaloraat/react-native-text';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useNavigation } from '@react-navigation/native';
+import LoadingScreen from './LoadingScreen';
+import UserInput from '../sharedComponents/UserInput';
+import Logo from '../sharedComponents/Logo';
+import CustomButton from '../sharedComponents/CustomButton';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  image: {
-    marginBottom: 40,
-  },
-
-  inputView: {
-    backgroundColor: '#FFC0CB',
-    borderRadius: 30,
-    width: '70%',
-    height: 45,
-    marginBottom: 20,
-
-    alignItems: 'center',
-  },
-
-  TextInput: {
-    height: 50,
-    flex: 1,
-    padding: 10,
-    marginLeft: 20,
-  },
-
-  forgot_button: {
-    height: 30,
-    marginBottom: 30,
-  },
-
-  loginBtn: {
-    width: '80%',
-    borderRadius: 25,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 40,
-    backgroundColor: '#FF1493',
-  },
-});
-
-const SignUpScreen = ({ navigation }) => {
+const SignUpScreen = () => {
 //   const { colors } = theme;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setUserName] = useState('');
+  const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigation = useNavigation();
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -93,48 +44,52 @@ const SignUpScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={require('../assets/lion.jpg')} />
+    loading ? <LoadingScreen /> : (
+      <KeyboardAwareScrollView
+        contentContainerStyle={{
+          flex: 1,
+          justifyContent: 'center',
+        }}
+      >
+        <View>
+          <Logo style={{ marginVertical: 100 }} />
+          <UserInput
+            name="NAME"
+            value={name}
+            setValue={setName}
+            autoCorrect={false}
+            autoCapitalize="words"
+            keyboardType="email-address"
+          />
+          <UserInput
+            name="EMAIL"
+            value={email}
+            setValue={setEmail}
+            autoCompleteType="email"
+            keyboardType="email-address"
+          />
+          <UserInput
+            name="PASSWORD"
+            value={password}
+            secureTextEntry
+            autoCompleteType="password"
+            setValue={setPassword}
+          />
 
-      <StatusBar style="auto" />
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Email."
-          placeholderTextColor="#003f5c"
-          onChangeText={(e) => setEmail(e)}
-        />
-      </View>
+          <CustomButton
+            onPress={() => handleSubmit()}
+            textValue="Sign Up"
+          />
 
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Password."
-          placeholderTextColor="#003f5c"
-          secureTextEntry
-          onChangeText={(p) => setPassword(p)}
-        />
-      </View>
+          <Text small center>
+            Already have an account?
+            <Text onPress={() => navigation.navigate('SignIn')} color="#ff2222"> Sign In</Text>
+          </Text>
 
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Name."
-          placeholderTextColor="#003f5c"
-          secureTextEntry
-          onChangeText={(n) => setUserName(n)}
-        />
-      </View>
-
-      <TouchableOpacity>
-        <Text style={styles.forgot_button}>Sign In</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => handleSubmit()} style={styles.loginBtn}>
-        <Text style={styles.loginText}>{loading ? 'Please wait...' : 'SIGN UP'}</Text>
-      </TouchableOpacity>
-    </View>
+        </View>
+      </KeyboardAwareScrollView>
+    )
   );
 };
 
-export default withTheme(SignUpScreen);
+export default SignUpScreen;

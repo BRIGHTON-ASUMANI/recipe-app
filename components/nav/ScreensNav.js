@@ -65,7 +65,7 @@ const ScreensNav = () => {
         )
         : (
           <>
-            <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen} />
+            <Stack.Screen name="SignIn" options={{ headerShown: false }} component={LoginScreen} />
             <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUpScreen} />
           </>
         )}
