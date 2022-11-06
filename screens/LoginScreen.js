@@ -29,6 +29,7 @@ const LoginScreen = () => {
     try {
       const endpoint = '/api/user/token/';
       const { data } = await axios.post(endpoint, { email, password });
+
       if (data.error) {
         alert(data.error);
       } else {
@@ -39,6 +40,7 @@ const LoginScreen = () => {
         // alert('Sign in successful');
       }
     } catch (err) {
+      console.log({ err, email, password });
       setLoading(false);
       alert('Error logging in');
     }
