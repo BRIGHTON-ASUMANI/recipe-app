@@ -11,4 +11,4 @@ export const logiHeaders = async () => {
   return { headers };
 };
 
-export const API = 'https://small-tools-work-41-90-68-191.loca.lt';
+export const API = process.env.REACT_BASE_URL;
